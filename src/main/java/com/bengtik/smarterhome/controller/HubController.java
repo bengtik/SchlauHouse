@@ -1,7 +1,7 @@
 package com.bengtik.smarterhome.controller;
 
-import com.bengtik.smarterhome.LightEnvironmentVo;
-import com.bengtik.smarterhome.PhilipsLightVo;
+import com.bengtik.smarterhome.vo.LightEnvironmentVo;
+import com.bengtik.smarterhome.vo.PhilipsLightVo;
 import com.bengtik.smarterhome.hue.HueService;
 import com.bengtik.smarterhome.lights.LightEnvironmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class HubController {
 
     @PutMapping("/continuous")
     public void pushContinuously(@RequestParam("count")int count, @RequestBody List<PhilipsLightVo> lightVos){
-        hueService.pushContinuousToHub(count, lightVos);
+        hueService.pushContinuouslyToHub(count, lightVos);
     }
 
     @PutMapping("/environment/{name}")

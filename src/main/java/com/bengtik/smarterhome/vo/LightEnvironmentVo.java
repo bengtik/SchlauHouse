@@ -1,4 +1,4 @@
-package com.bengtik.smarterhome;
+package com.bengtik.smarterhome.vo;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -9,7 +9,7 @@ import java.util.List;
 public class LightEnvironmentVo {
 
     @Id
-    private long id;
     private String name;
+
     private List<PhilipsLightVo> lightVos;
 }

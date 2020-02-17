@@ -1,10 +1,12 @@
 package com.bengtik.smarterhome.lights;
 
-import com.bengtik.smarterhome.LightEnvironmentVo;
 import com.bengtik.smarterhome.hue.HueService;
+import com.bengtik.smarterhome.vo.LightEnvironmentVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
@@ -27,13 +29,8 @@ public class LightEnvironmentService {
         hueService.pushToHub(getEnvironmentByName(name).getLightVos());
     }
 
-
-    LightEnvironmentVo getEnvironmentById(long id) {
-        return lightsRepository.findById(id);
-    }
-
     LightEnvironmentVo getEnvironmentByName(String name) {
-        return lightsRepository.findByName(name);
+        return lightsRepository.findByName(name).orElseThrow(() -> new NoSuchElementException("Not found"));
     }
 
 }

@@ -1,7 +1,7 @@
 package com.bengtik.smarterhome.hue;
 
 
-import com.bengtik.smarterhome.PhilipsLightVo;
+import com.bengtik.smarterhome.vo.PhilipsLightVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.bengtik.smarterhome.hue;
 
-import com.bengtik.smarterhome.PhilipsLightVo;
+import com.bengtik.smarterhome.vo.PhilipsLightVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,18 +27,20 @@ public class HueService {
         lightVos.forEach(hueConnector::putStateToLight);
     }
 
-    public void pushContinuousToHub(int count, List<PhilipsLightVo> philipsLightVoList) {
+    public void pushContinuouslyToHub(int count, List<PhilipsLightVo> philipsLightVoList) {
         for (int i = 0; i < count; i++) {
-            philipsLightVoList.forEach(lightVo -> {
+            for (PhilipsLightVo lightVo : philipsLightVoList) {
                 pushToHub(lightVo);
+                log.info("sent to hub {}", lightVo);
+
+                //since the hub executes API calls async, we need to wait for the
+                // transition time (one unit is 100ms) before firing the next event.
                 try {
                     Thread.sleep(lightVo.getTransitionLength() * 100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                log.info("sent to hub {}", lightVo);
-            });
-
+            }
         }
     }
 }

@@ -43,3 +43,6 @@ asciidoctor {
 	inputs.dir snippetsDir
 	dependsOn test
 }
+bootJar {
+	launchScript()
+}
